@@ -1,16 +1,17 @@
 {% extends 'gestion_seguros/base.html' %}
 
-{% block titulo %} Seguros AP: Gestión de pólizas{% endblock %}
+{% block titulo %} Seguros AP: Gestión de Asegurados{% endblock %}
 
 {% block contenido %} 
 <h1>Gestión de Asegurados</h1>
 
 <div class="p-2">
-    <h3>Cartera de pólizas</h3>
-    <h4>Poliza: {{poliza.numero}}</h4>
+    <h3>Cartera de asegurados</h3>
+    <h4>Polizas: {{poliza.numero}}</h4>
     <div class="container d-flex flex-wrap p-2">
         <div class="">
             <form action="" method="POST">
+              
                 {% csrf_token %}
             <table class="table table-dark">
                 <thead>
@@ -22,6 +23,7 @@
                     <td>Documento</td>
                     <td>Mail</td>
                     <td>Accion</td>
+                    
                 </thead>
                 {% for certificado in certificados %}
                 <tr>
@@ -32,7 +34,8 @@
                     <td>{{certificado.asegurado.fecha_nacimiento}}</td>
                     <td>{{certificado.asegurado.documento}}</td>
                     <td>{{certificado.asegurado.email}}</td>
-                    <td></td>                        
+                    <td><input type="submit" value="Modificar" class="btn btn-primary"></td> 
+                                           
                 </tr>
                 {% empty %}
                 <span class="">No posee certificados registrados en el sistema</span>
@@ -44,7 +47,8 @@
                     <td>{{form.fecha_nacimiento}}</td>
                     <td>{{form.documento}}</td>
                     <td>{{form.email}}</td>
-                    <td><input type="submit" value="+" class="btn btn-primary"></td>                     
+                    <td><input type="submit" value="+" class="btn btn-primary"></td>
+                                         
                 </form>
             </table>
         </div>

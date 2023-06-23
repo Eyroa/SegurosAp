@@ -36,7 +36,8 @@ class Poliza(models.Model):
     fecha_fin = models.DateField(verbose_name="Fecha de fin cobertura")
     fecha_limite_carga = models.DateField(verbose_name="Fecha límite de actualización de nómina")
     condiciones = models.TextField(max_length=2048, verbose_name="Resumen condiciones de póliza")
-
+    members = models.ManyToManyField(Cliente, related_name='polizas')
+    
     def __str__(self):
         return self.numero
 

@@ -16,13 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from rest_framework.routers import DefaultRouter
 from django.urls import path, include
-
-
-
-
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,5 +24,4 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view, name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view, name='logout'),
     path('gestion_seguros/', include('gestion_seguros.urls')),
-    path('api_auth', include('rest_framework.urls')),
 ]

@@ -2,14 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
-from rest_framework import viewsets, permissions
-from .serializers import ClienteSerializer
-
 from django.forms.models import model_to_dict
 from django.db.models import Max
-from .forms import AltaClienteForm, AltaPolizaForm, ModificarClienteForm, ModificarPolizaForm, AltaAseguradoForm
+from .forms import AltaClienteForm, AltaPolizaForm, ModificarClienteForm, ModificarPolizaForm, AltaAseguradoForm, ModificarAseguradoForm
 from .models import Cliente, Poliza, Asegurado, Certificado
-
 
 
 # Create your views here.
@@ -104,8 +100,21 @@ def detalle_poliza(request, poliza_id):
     context = {'poliza': poliza, 'form': form}
     return render(request, 'gestion_seguros/detalle_poliza.html', context)
 
+@login_required
 def gestion_asegurados(request):
-    context={}
+    asegurados=Asegurado.objects.all()
+
+    if request.method == "POST":
+        form = AltaAseguradoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Asegurado dado de alta')
+            return redirect("gestion_asegurados")
+        else:
+            pass
+    else:
+        form = AltaAseguradoForm()
+    context = {'asegurados': asegurados, 'form': form}
     return render(request, 'gestion_seguros/gestion_asegurados.html', context)
 
 def cartera_asegurados(request, poliza_id):
@@ -132,7 +141,23 @@ def cartera_asegurados(request, poliza_id):
     context = {'certificados': certificados, 'form': form, 'poliza': poliza}
     return render(request, 'gestion_seguros/cartera_asegurados.html', context)
 
-class ClienteViewSet(viewsets.ModelViewSet):
-    queryset = Cliente.objects.all()
-    Serializer_class = ClienteSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+def detalle_asegurado(request, asegurado_id):
+    asegurado=Asegurado.objects.get(id = asegurado_id) 
+    if request.method == "POST":
+        form = ModificarAseguradoForm(request.POST)
+        if form.is_valid():
+            Asegurado.objects.filter(id = asegurado_id).update(
+                nombre=form.cleaned_data["nombre"],
+                apellido=form.cleaned_data["apellido"],
+                documento=form.cleaned_data["documento"],
+                fecha_nacimiento=form.cleaned_date["fecha_nacimiento"],
+                email=form.cleaned_data["email"],
+                
+            )
+            messages.add_message(request, messages.SUCCESS, 'Cliente modificado con éxito')
+        else:
+            pass
+    else:
+        form = ModificarAseguradoForm(initial = model_to_dict(asegurado))
+    context = {'asegurado': asegurado, 'form': form}
+    return render(request, 'gestion_seguros/detalle_asegurado.html', context)

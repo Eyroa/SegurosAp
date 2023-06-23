@@ -85,3 +85,27 @@ class AltaAseguradoForm(forms.ModelForm):
     class Meta:
         model = Asegurado
         fields = "__all__"
+
+class ModificarAseguradoForm(forms.ModelForm):
+    class Meta:
+        model = Asegurado
+        fields = "__all__"
+        widgets = {
+            "nombre": forms.DateInput(
+                attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)'}
+            ),
+            "documento": forms.DateInput(
+                attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)'}
+            ),
+            "fecha_nacimiento": forms.DateInput(
+                attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)'}
+            )
+        }
+
+    def clean(self):
+        documento = self.cleaned_data["documento"]
+        if Asegurado.objects.filter(documento = documento).exists():
+            raise ValidationError("Ya hay un asegurado inscripto con ese documento")
+        
+        return self.cleaned_data
+
