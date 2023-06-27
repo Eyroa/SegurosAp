@@ -1,0 +1,32 @@
+{% extends 'gestion_seguros/base.html' %}
+
+{% block titulo %} Seguros AP: Gestión de pólizas{% endblock %}
+
+{% block contenido %} 
+<h1>Gestión de pólizas</h1>
+
+<div class="p-2 mb-3">
+    <h3>Dar de alta poliza</h3>
+    <section class="form-container secondary-bg">
+        
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Dar de alta" class="btn btn-primary">
+        </form>
+    </section>
+</div>
+
+<div class="p-2">
+    <h3>Cartera de pólizas</h3>
+    <div class="container d-flex flex-wrap p-2">
+        {% for poliza in polizas %}
+            {% include 'gestion_seguros/cards/card_poliza.html' with poliza=poliza %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{% extends 'gestion_seguros/base.html' %}
+
+{% block titulo %} Seguros AP: Gestión de clientes{% endblock %}
+
+{% block contenido %} 
+<h1>Gestión de póliza</h1>
+
+<div class="p-2 mb-3">
+    <h3>Visualizar y modificar póliza</h3>
+    <section class="form-container secondary-bg">
+        
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Modificar datos" class="btn btn-primary">
+        </form>
+    </section>
+</div>
+
+{% endblock %}

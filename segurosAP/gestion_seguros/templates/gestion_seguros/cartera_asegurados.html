@@ -1,0 +1,20 @@
+{% extends 'gestion_seguros/base.html' %}
+
+{% block titulo %} Seguros AP: Gestión de asegurados{% endblock %}
+
+{% block contenido %} 
+<h1>Gestión de asegurados</h1>
+
+<div class="p-2">
+    <h3>Cartera de asegurados</h3>
+    <h4>Poliza: {{Poliza.asegurado}}</h4>
+    <div class="container d-flex flex-wrap p-2">
+        {% for poliza in polizas %}
+            {% include 'gestion_seguros/cards/card_asegurado.html' with asegurado=asegurado %}
+        {% empty %}
+        <p Style="color:red"</p> <span class="">No posee pólizas registradas en el sistema</span>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
