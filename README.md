@@ -37,7 +37,6 @@ asegurados hasta la hora de inicio.
 **Objetos**<br>
 * Cliente
 * Póliza
-* Certificado
 * Asegurado
 
 ## Funcionalidades MVP
@@ -50,6 +49,5 @@ asegurados hasta la hora de inicio.
 
 * Visualizar datos póliza
 * Visualizar, dar de alta y dar de baja asegurados a una póliza
-* Visualizar datos de certificado y descargar certificado
 * Visualizar y modificar datos de asegurado
 
