@@ -1,0 +1,14 @@
+<div class="card w-25 m-3">
+    <div class="card-body">
+    <h5 class="card-title">{{asegurado.nombre}}</h5>
+    <p class="card-text mb-0"><b>Apellido:</b>{{asegurado.apellido}}</p>
+    <p class="card-text mb-0"><b>Documento:</b> {{asegurado.documento}}</p>
+    <p class="card-text mb-0"><b>Fecha de Nacimiento:</b> {{asegurado.fecha_nacimiento}}</p>
+    <p class="card-text mb-2"><b>Email:</b> {{asegurado.email}}</p>
+    <a href="{% url 'detalle_asegurado' asegurado.id %}" class="btn btn-primary">Modificar</a>
+   
+    </div>
+</div>
+
+
+

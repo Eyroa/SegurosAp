@@ -1,0 +1,65 @@
+body {
+    background-color: #e4dfda;
+}
+
+li.nav-item :hover{
+    background-color: rgb(229, 241, 237);
+    color: rgb(18, 20, 22);
+}
+
+.message {
+    list-style-type: none;  
+}
+
+.form-container {
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+}
+
+.form-container th{
+    text-align: right;
+    font-weight: 300;
+}
+
+.form-container td{
+    padding-left: 10px;
+    padding-bottom: 5px;
+    text-align: left;
+}
+
+.form-container tr{
+    margin-bottom: 5px;
+}
+
+.form-container input{
+    border-radius: 5px;
+    border: 0px;
+}
+
+.primary-bg{
+    background-color: #e4dfda;
+}
+
+.secondary-bg{
+    background-color: #4281a4;
+    color: white
+}
+
+.tertiary-bg{
+    background-color: #48a9a6;
+}
+
+.accesory-bg{
+    background-color: #d4b183;
+}
+
+.accent-bg{
+    background-color: #c1666b;
+}
+
+.inactive-bg{
+    background-color: #a3a3a3;
+}

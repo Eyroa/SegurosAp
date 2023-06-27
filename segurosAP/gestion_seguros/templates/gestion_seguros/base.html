@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %} {% endblock %}</title>
+    <link rel="shortcut icon" href="{% static 'gestion_seguros/images/creencia.png' %}"> 
+    <link rel="stylesheet" href="{% static 'gestion_seguros/bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'gestion_seguros/css/prueba.css' %}">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg accesory-bg">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Gestión Seguros AP</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                  </li>
+                  {% if perms.gestion_seguros.change_cliente %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'gestion_clientes' %}">Gestión Clientes</a>
+                  </li>
+                  {% endif %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'gestion_polizas' %}">Gestión Pólizas</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'gestion_asegurados' %}">Gestión Asegurados</a>
+                  </li>
+                 
+                </ul>
+              </div>
+              <div>
+                {% if user.is_authenticated %}
+                  <p>{{ user.get_username }} - <a href="{% url 'logout' %}">Logout</a></p>
+                {% else %}
+                  <a href="{% url 'login' %}">Login</a>
+                {% endif %}
+              </div>
+            </div>
+          </nav>
+    </header>
+    <section class="messages">
+      {% if messages %}
+        <ul class="alert alert-warning">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+    </section>
+    <main>
+      {% block contenido %}{% endblock %}
+    </main>
+    <footer class="fixed-bottom">
+        <div class="row bg-secondary p-1 text-light">
+            <div class="col">Sitio creado por el grupo 14 del curso de Django de Codo a Codo. 2023</div>
+        </div>
+    </footer>
+    
+    <script src="{% static 'gestion_seguros/bootstrap/bootstrap.bundle.js' %}"></script>
+</body>
+</html>
+

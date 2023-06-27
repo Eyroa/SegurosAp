@@ -1,0 +1,39 @@
+{% extends 'gestion_seguros/base.html' %}
+
+{% block titulo %} Seguros AP: Gestión de clientes{% endblock %}
+
+{% block contenido %} 
+<h1>Gestión de clientes</h1>
+
+<div class="p-2 mb-3">
+    <h3>Dar de alta cliente</h3>
+    <section class="form-container secondary-bg">
+        
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Dar de alta" class="btn btn-primary">
+        </form>
+    </section>
+</div>
+
+<div class="p-2">
+    <h3>Cartera de clientes</h3>
+    <div class="container d-flex flex-wrap p-2">
+        {% for cliente in clientes %}
+        <div class="card w-25 m-2">
+            <div class="card-body">
+            <h5 class="card-title">{{cliente.nombre}}</h5>
+            <p class="card-text mb-0"><b>Cuit</b>: {{cliente.documento}}</p>
+            <p class="card-text mb-2"><b>Email</b>: {{cliente.email}}</p>
+            <a href="../gestion_clientes/detalle_cliente/{{cliente.id}}" class="btn btn-primary">Modificar</a>
+            <a href="../gestion_clientes/cartera_cliente/{{cliente.id}}" class="btn btn-primary">Pólizas</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

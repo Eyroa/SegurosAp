@@ -1,0 +1,20 @@
+{% extends 'gestion_seguros/base.html' %}
+
+{% block titulo %} Seguros AP: Gestión de pólizas{% endblock %}
+
+{% block contenido %} 
+<h1>Gestión de pólizas</h1>
+
+<div class="p-2">
+    <h3>Cartera de pólizas</h3>
+    <h4>Cliente: {{cliente.nombre}}</h4>
+    <div class="container d-flex flex-wrap p-2">
+        {% for poliza in polizas %}
+            {% include 'gestion_seguros/cards/card_cliente.html' with cliente=cliente %}
+        {% empty %}
+        <p Style="color:red"</p> <span class="">No posee polizas registradas en el sistema</span>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
